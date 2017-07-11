@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<form>
+			<input type = "button" onclick = "doPopup()" value = "Click me" />
+			<input type = "button" onclick = "increaseAge()" value = "Increase age" />
+		</form>
+	</head>
+		<body>
+			<script>
+		
+			function squareNumber(i) {
+				return i*i;
+			}
+			var resultOne = squareNumber(5);
+			document.write(resultOne);
+			document.write("\n");
+			
+			function sumThreeNumbers(x,y,z) {
+				return x + y + z;
+			}
+			var resultTwo = sumThreeNumbers(1,2,3);
+			document.write(resultTwo);
+			document.write("\n");
+			
+			function createPerson(name,age,occupation){
+				var one = {};
+				one.name = name;
+				one.age = age;
+				one.occupation = occupation;
+				return one;
+			}
+			var person = createPerson("Alfie",26,"Consultant");
+			document.write(JSON.stringify(person,null,2));
+			document.write("\n");
+			person.age = 18;
+			document.write(JSON.stringify(person,null,2));
+			
+			function doPopup(){window.alert("Pop");}
+			
+			function increaseAge() {
+			person.age++;
+			document.write(JSON.stringify(person,null,2));
+			}
+			
+			</script>
+		</body>
+</html>
