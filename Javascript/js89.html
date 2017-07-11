@@ -1,0 +1,39 @@
+<html>
+    <body>
+        <form>
+            <input type = "text" id = "textbox1" />
+        </form>
+        <script>
+        //     // Request the URL
+        // var requestURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/example.json'
+        //     // Make the request
+        // var request = new XMLHttpRequest();
+        // request.open('GET', requestURL);
+        // request.responseType = 'json'
+        // request.send();
+
+        // request.onload = function() {
+        //     var superHeroes = request.response;
+        //     document.write(JSON.stringify(superHeroes,null,2));
+        // }
+
+        var requestURL2 = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/kings.json'
+        var request2 = new XMLHttpRequest();
+        request2.open('GET',requestURL2);
+        request2.responseType = 'json'
+        request2.send();
+
+        request2.onload = function() {
+            var kings = request2.response;
+            var stringKings = JSON.stringify(kings,null,2);
+                // Create the textbox for output
+            var myTextBox = document.createElement('input');
+            myTextBox.setAttribute('type','text');
+            
+            var getKingNames = document.getElementById('nm');
+            myTextBox.innerText(getKingNames);
+        }
+
+        </Script>
+    </body>
+</html>

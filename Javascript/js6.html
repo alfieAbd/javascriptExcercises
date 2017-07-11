@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <script>
+            function numberGame(number) {
+                var rounds = 0;
+                while(number != 1) {
+                    if(number % 3 === 0) {
+                        number = number / 3;
+                        rounds++;
+                    } else {
+                        number = number - 1;
+                        rounds++;
+                    }
+                }
+                document.write("Completed in " + rounds + " rounds!");
+            }
+            var gameOne = numberGame(6);
+            document.write(gameOne);
+
+        </script>
+    </body>
+</html>

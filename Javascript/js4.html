@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <script>
+            function createPerson(name,age,occupation){
+				var one = {};
+				one.name = name;
+				one.age = age;
+				one.occupation = occupation;
+				return one;
+			}
+			var person = createPerson("Alfie",15,"Consultant");
+
+            function checkAge(i){
+                if(i >= 20 && i <= 40) {
+                return true;
+                }
+                return false;
+            }
+
+            var age = person.age
+            var check = checkAge(age)
+            document.write(check)
+        </script>
+    </body>
+</html>

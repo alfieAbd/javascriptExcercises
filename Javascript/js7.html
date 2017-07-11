@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <form>
+            <input type = "button" onclick = "createParagraph()" value = "Create Paragraph" />
+            <input type = "button" onclick = "editParagraph()" value = "Edit Paragraph" />
+            <input type = "button" onclick = "deleteParagraph()" value = "Delete Paragraph" />
+        </form>
+        <p id = "p1">Paragraph 1</p>
+        <p id = "p3">Paragraph 3</p>
+        <script>
+
+            function createParagraph(){
+                // Create P tag
+            var newPTag = document.createElement("p");
+                // Create text to add
+            var content = document.createTextNode("New paragraph");
+                // Add content to the P tag
+            newPTag.appendChild(content);
+                // Locate where we want to insert the new p tag
+            var elem = document.getElementById('p1');
+                // Add the paragraph
+            elem.appendChild(newPTag)
+            }
+       
+            function editParagraph(){
+            document.getElementsByTagName('p')[2].innerHTML = "Even newer paragraph";
+            }
+        
+            function deleteParagraph(){
+            document.getElementsByTagName('p')[0].innerHTML = "";
+            }
+            
+        </script>
+    </body>
+</html>
