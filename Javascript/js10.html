@@ -11,7 +11,7 @@
             vehicle.make = make;
             vehicle.reg = reg;
             vehicle.problems = problems;
-            console.log(vehicle)
+          //  console.log(vehicle)
             car.push(vehicle);
         }
 
@@ -25,7 +25,7 @@
         function checkIn(veh) {
             if(veh != null) {
                 garage.push(veh);
-                console.log('vehicle added to garage')
+               // console.log('vehicle added to garage')
             } else {
                 alert('car not added')
             }
@@ -37,22 +37,33 @@
         checkIn(car[3]);
         //checkIn();
 
-        document.write(JSON.stringify(garage,2));
+        // document.write(JSON.stringify(garage,2));
 
         function checkout(registration) {
-            if(garage == null){
+            if(garage == null) {
                 alert('garage is already empty')
             } else {
-                let registration = car.reg;
-                let index = garage.indexOf(registration);
+                // -------- Insert loop here --------
+                // Loop through garage to check every car
+                for(let i = 0; i <= garage.length; i++) {
+                    // Check every car object and find object that matches registration
+                    for(let j = 0; j <= car.length; j++) {
+                        if(car[j].reg == registration) {
+                        let index = garage.indexOf(i)[j];
+                        }
+                    }
+                    // let regis = car.find(registration);
+                }
                 garage.splice(index,1);
-                console.log('vehicle with reg' + registration + ' removed from garage');
+                // console.log('vehicle with reg ' + registration + ' removed from garage');
             }
         }
         
-       
+
+        console.log(JSON.stringify(garage,2));
         checkout('ea53mrv');
-        document.write(JSON.stringify(garage,2));
+        console.log(JSON.stringify(garage,2));
+        // document.write(JSON.stringify(garage,2));
 
         // function calculateBill(registration) {
         //     if(car == null) {
@@ -65,6 +76,9 @@
         //         return bill;
         //     }
         // }
+
+        // calculateBill('ea53mrv');
+        // console.log(calculateBill('ea53mrv'));
 
     </script>
 </html>
