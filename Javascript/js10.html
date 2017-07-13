@@ -1,0 +1,70 @@
+<html>
+    <body></body>
+    <script>
+
+        let garage = [];
+        let car = [];
+
+        function createCar(model,make,reg,problems){
+            let vehicle = {};
+            vehicle.model = model;
+            vehicle.make = make;
+            vehicle.reg = reg;
+            vehicle.problems = problems;
+            console.log(vehicle)
+            car.push(vehicle);
+        }
+
+        createCar('corsa','vauxhall','ea53mrv',2);
+        createCar('golf','volkswagen','x788ngs',5);
+        createCar('juke','nissan','ng05hue',1);
+        createCar('warrior','mitsubishi','ko98uah',7);
+        
+        // document.write(JSON.stringify(car,2));
+    
+        function checkIn(veh) {
+            if(veh != null) {
+                garage.push(veh);
+                console.log('vehicle added to garage')
+            } else {
+                alert('car not added')
+            }
+        }
+
+        checkIn(car[0]);
+        checkIn(car[1]);
+        checkIn(car[2]);
+        checkIn(car[3]);
+        //checkIn();
+
+        document.write(JSON.stringify(garage,2));
+
+        function checkout(registration) {
+            if(garage == null){
+                alert('garage is already empty')
+            } else {
+                let registration = car.reg;
+                let index = garage.indexOf(registration);
+                garage.splice(index,1);
+                console.log('vehicle with reg' + registration + ' removed from garage');
+            }
+        }
+        
+       
+        checkout('ea53mrv');
+        document.write(JSON.stringify(garage,2));
+
+        // function calculateBill(registration) {
+        //     if(car == null) {
+        //         alert('cannot calculate bill')
+        //     } else {
+        //         let registration = car.reg;
+        //         let price = 50;
+        //         let repairsMade = car.problems;
+        //         bill = price * repairsMade;
+        //         return bill;
+        //     }
+        // }
+
+    </script>
+</html>

@@ -1,9 +1,12 @@
 <html>
     <body>
         <form>
-            <input type = "text" id = "textbox1" />
+            <input type = 'text' id = 'textbox1' />
         </form>
-        <script>
+        <p id = 'nm'></p>
+     
+    </body>  
+     <script>
         //     // Request the URL
         // var requestURL = 'https://raw.githubusercontent.com/ewomackQA/JSONDataRepo/master/example.json'
         //     // Make the request
@@ -25,15 +28,9 @@
 
         request2.onload = function() {
             var kings = request2.response;
-            var stringKings = JSON.stringify(kings,null,2);
-                // Create the textbox for output
-            var myTextBox = document.createElement('input');
-            myTextBox.setAttribute('type','text');
-            
-            var getKingNames = document.getElementById('nm');
-            myTextBox.innerText(getKingNames);
+            console.log(kings[0].nm)
+            document.getElementById('textbox1').value = kings[0].nm;
         }
 
-        </Script>
-    </body>
+        </script>
 </html>

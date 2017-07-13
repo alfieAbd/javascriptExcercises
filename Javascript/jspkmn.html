@@ -1,0 +1,76 @@
+<html>
+    <body>
+        <p id = 'title'><h3>Pokemon move effectiveness program </h3></p>
+        <p id = 'movetypetxt'><h5> Move type ------> Target type(s) </h5></p>
+        <form>
+            <input type = 'text' id = 'movetype'/>
+            <input type = 'text' id = 'targettype'/>
+            <input type = 'text' id = 'targettype2'/>
+            <input type = 'button' onclick = 'execute()' id = 'button' value = 'Check'/><br>
+            <input type = 'text' id = 'output' />
+        </form>
+    </body>
+    <script>
+
+        var types = ['normal','fighting','flying','poison','ground','rock','bug','ghost',
+        'steel','fire','water','grass','electric','psychic','ice','dragon','dark','fairy']
+        var effectiveness = {};
+
+        effectiveness['normal'] = [1,1,1,1,1,0.5,1,0,0.5,1,1,1,1,1,1,1,1,1];
+        effectiveness['fighting'] = [2,1,0.5,0.5,1,2,0.5,0,2,1,1,1,1,0.5,2,1,2,0.5];
+        effectiveness['flying'] = [1,2,1,1,1,0.5,2,1,0.5,1,1,2,0.5,1,1,1,1,1];
+        effectiveness['poison'] = [1,1,1,0.5,0.5,0.5,1,0.5,0,1,1,2,1,1,1,1,1,2];
+        effectiveness['ground'] = [1,1,0,2,1,2,0.5,1,2,2,1,0.5,2,1,1,1,1,1];
+        effectiveness['rock'] = [1,0.5,2,1,0.5,1,2,1,0.5,2,1,1,1,1,2,1,1,1];
+        effectiveness['bug'] = [1,0.5,0.5,0.5,1,1,1,0.5,0.5,0.5,1,0.5,1,2,1,1,2];
+        effectiveness['ghost'] = [0,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,0.5,1];
+        effectiveness['steel'] = [1,1,1,1,1,2,1,1,0.5,0.5,0.5,1,0.5,1,2,1,1,2];
+        effectiveness['fire'] = [1,1,1,1,1,0.5,2,1,2,0.5,0.5,2,1,1,2,0.5,1,1];
+        effectiveness['water'] = [1,1,1,1,2,2,1,1,1,2,0.5,0.5,1,1,1,0.5,1,1];
+        effectiveness['grass'] = [1,1,0.5,0.5,2,2,0.5,1,0.5,0.5,2,0.5,1,1,1,0.5,1,1];
+        effectiveness['electric'] = [1,1,2,1,0,1,1,1,1,1,2,0.5,0.5,1,1,0.5,1,1];
+        effectiveness['psychic'] = [1,2,1,2,1,1,1,1,0.5,1,1,1,1,0.5,1,1,0,1];
+        effectiveness['ice'] = [1,1,2,1,2,1,1,1,0.5,0.5,0.5,2,1,1,0.5,2,1,1];
+        effectiveness['dragon'] = [1,1,1,1,1,1,1,1,0.5,1,1,1,1,1,1,2,1,0];
+        effectiveness['dark'] = [1,0.5,1,1,1,1,1,2,1,1,1,1,1,2,1,1,0.5,0.5];
+        effectiveness['fairy'] = [1,2,1,0.5,1,1,1,1,0.5,0.5,1,1,1,1,1,2,2,1];
+
+        // execute method to output result to a textbox
+
+        function execute() {
+
+            var type1 = document.getElementById('movetype').value;
+            var type2 = document.getElementById('targettype').value;
+            var type3 = document.getElementById('targettype2').value;
+
+            // console.log(type1)
+            // console.log(type2)
+
+            var check;
+
+            if(type2 == '' || type3 == '') {
+                check = checkEffectiveness(type1,type2);
+            } else {
+                check = checkEffectiveness2(type1,type2,type3);
+            }
+            document.getElementById('output').value = check
+
+        }
+
+        function checkEffectiveness(attack,defend){
+            // Check through effectiveness array, get the index of it so can return the value at 
+            // the same index number in types array
+            var result = effectiveness[attack][types.indexOf(defend)];
+
+            return result;
+        }
+
+        function checkEffectiveness2(attack,defend,defend2){
+            var result = effectiveness[attack][types.indexOf(defend)];
+            var result2 = effectiveness[attack][types.indexOf(defend2)];
+            var finalResult = result * result2;
+
+            return finalResult;
+        }    
+    </script>
+</html>
