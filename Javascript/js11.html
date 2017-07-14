@@ -1,0 +1,85 @@
+<html>
+    <head><h2>Virtual garage interface</h2></head>
+    <body>
+        <h4><p id = 'guide'>Command examples:</p></h4>
+        <p> add micra nissan hi32ion 4 </p>
+        <p> output </p>
+        <p> check out as97ioh </p>
+        <p> empty garage </p>
+    </body>
+    <form>
+         <input type = 'text' id = 'command' value = 'Enter Command' onfocus = 'if(this.value == "Enter Command") this.value = "";' /><br>
+            <br>
+         <input type = 'button' id = 'execute' value = 'Execute' onclick = 'executeCommand()' /><br>
+    </form>
+    <script>
+
+        let garage = [];
+
+        function executeCommand() {
+
+            let commandString = document.getElementById('command').value;
+            let splitCommandString = commandString.split(' ');
+
+            if(splitCommandString.includes('add')) {
+                let model = splitCommandString[1];
+                let make = splitCommandString[2];
+                let reg = splitCommandString[3];
+                let faults = splitCommandString[4];
+                createCar(model,make,reg,faults);
+                console.log(JSON.stringify(garage,2));
+
+            } if(splitCommandString.includes('checkout')) {
+                let registration = splitCommandString[1];
+                checkout(registration);
+                console.log(JSON.stringify(garage,2));
+
+            } if(splitCommandString.includes('output')) {
+                garage.forEach(x => document.write(JSON.stringify(x,2)));
+
+            } if(splitCommandString.includes('bill')) {
+                let registration = splitCommandString[1]
+                calculateBill(registration);
+                console.log(calculateBill(registration));
+
+            } if(splitCommandString.includes('empty')) {
+                emptyGarage();
+                console.log(JSON.stringify(garage,2));
+            }
+        }
+
+        function createCar(model,make,reg,faults){
+            let car = {};
+            car.model = model;
+            car.make = make;
+            car.reg = reg;
+            car.faults = faults;
+            garage.push(car);
+        }
+
+        function checkout(registration) {
+                  for(let i = 0; i < garage.length; i++) {
+                    if(garage[i].reg == registration){
+                    garage.splice(i,1);
+                    }
+                }
+            }
+
+        function calculateBill(registration) {
+            let bill = 0;
+                for(let i = 0; i < garage.length; i++) {
+                    if(garage[i].reg == registration) {
+                    let price = 50;
+                    let repairsMade = garage[i].faults;
+                    bill = price * repairsMade;
+                    }
+                }
+                return bill; 
+        }
+        
+        function emptyGarage() {
+            garage = [];
+        }
+
+    </script>
+</html>
