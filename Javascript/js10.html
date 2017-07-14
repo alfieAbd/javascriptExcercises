@@ -1,84 +1,91 @@
 <html>
-    <body></body>
+    <head>
+        <p id = 'title'><h2>Virtual Garage</h2></p>
+    </head>
+        <body>
+            <p id = 'createCar'><h4>Create Car and check into garage</h4></p>
+        </body>
+            <form>
+        <input type = 'text' id = 'carmodel' value = 'Input car model'onfocus = 'if(this.value == "Input car model") this.value = "";' />
+        <input type = 'text' id = 'carmake' value = 'Input car make' onfocus = 'if(this.value == "Input car make") this.value = ""'/>
+        <input type = 'text' id = 'carreg' value = 'Input car reg' onfocus = 'if(this.value == "Input car reg") this.value = ""'/>
+        <input type = 'text' id = 'carfaults' value = 'Input car faults' onfocus = 'if(this.value == "Input car faults") this.value = ""'/>
+        <input type = 'button' id = 'execute' value = 'Create vehicle' onclick = 'createCar()' /><br>
+                <br>
+        <input type = 'text' id = 'displaycheckin' size = '40' /><br>
+            <br>
+                <br>
+              </form>
+        <body>
+            <p id = 'removeCar'><h4>Checkout from garage</h4></p>
+        </body>
+            <form>
+        <input type = 'text' id = 'regCheckout' value = 'Input registration' onfocus = 'if(this.value == "Input registration") this.value = "";' />
+        <input type = 'button' id = 'execute' value = 'Checkout vehicle' onclick = 'checkout()' /><br>
+                <br>
+        <input type = 'text' id = 'displaycheckout' size = '50' /><br>
+            <br>
+                <br>
+            </form>
+    <body>
+            <p id = 'calcbill'><h4>Calculate bills</h4></p>
+        </body>
+            <form>
+        <input type = 'text' id = 'regbills' value = 'Input registration' onfocus = 'if(this.value == "Input registration") this.value = "";' />
+        <input type = 'button' id = 'execute' value = 'Calculate bills' onclick = 'calculateBill()' /><br>
+            <br>
+        <input type = 'text' id = 'displaybill' size = '50'/><br>
+           <br>
+                <br>
+            </form>
+            <body>
+            <p id = 'calcbill'><h4>Output garage contents</h4></p>
+        </body>
+            <form>
+        <input type = 'button' id = 'outputgaragecontents' value = 'Show cars in garage' onclick = 'outputGarage()' /><br>
+         <br>
+                <br>
+            </form>
     <script>
 
         let garage = [];
-        let car = [];
 
-        function createCar(model,make,reg,problems){
+        function createCar(){
             let vehicle = {};
-            vehicle.model = model;
-            vehicle.make = make;
-            vehicle.reg = reg;
-            vehicle.problems = problems;
-          //  console.log(vehicle)
-            car.push(vehicle);
+            vehicle.model = document.getElementById('carmodel').value;
+            vehicle.make = document.getElementById('carmake').value;
+            vehicle.reg = document.getElementById('carreg').value;
+            vehicle.faults = document.getElementById('carfaults').value;
+            garage.push(vehicle);
+            document.getElementById('displaycheckin').value = 'Vehicle with registration ' + vehicle.reg + ' added to garage';
         }
 
-        createCar('corsa','vauxhall','ea53mrv',2);
-        createCar('golf','volkswagen','x788ngs',5);
-        createCar('juke','nissan','ng05hue',1);
-        createCar('warrior','mitsubishi','ko98uah',7);
-        
-        // document.write(JSON.stringify(car,2));
-    
-        function checkIn(veh) {
-            if(veh != null) {
-                garage.push(veh);
-               // console.log('vehicle added to garage')
-            } else {
-                alert('car not added')
-            }
-        }
-
-        checkIn(car[0]);
-        checkIn(car[1]);
-        checkIn(car[2]);
-        checkIn(car[3]);
-        //checkIn();
-
-        // document.write(JSON.stringify(garage,2));
-
-        function checkout(registration) {
-            if(garage == null) {
-                alert('garage is already empty')
-            } else {
-                // -------- Insert loop here --------
-                // Loop through garage to check every car
-                for(let i = 0; i <= garage.length; i++) {
-                    // Check every car object and find object that matches registration
-                    for(let j = 0; j <= car.length; j++) {
-                        if(car[j].reg == registration) {
-                        let index = garage.indexOf(i)[j];
-                        }
+        function checkout() {
+            let registration = document.getElementById('regCheckout').value;
+                for(let i = 0; i < garage.length; i++) {
+                    if(garage[i].reg == registration){
+                    garage.splice(i,1);
                     }
-                    // let regis = car.find(registration);
                 }
-                garage.splice(index,1);
-                // console.log('vehicle with reg ' + registration + ' removed from garage');
-            }
+            document.getElementById('displaycheckout').value = 'Vehicle with registration ' + registration.value + ' has been checked out';
         }
-        
 
-        console.log(JSON.stringify(garage,2));
-        checkout('ea53mrv');
-        console.log(JSON.stringify(garage,2));
-        // document.write(JSON.stringify(garage,2));
+        function calculateBill() {
+            let registration = document.getElementById('regbills').value;
+            let bill = 0;
+                for(let i = 0; i < garage.length; i++) {
+                    if(garage[i].reg == registration) {
+                    let price = 50;
+                    let repairsMade = garage[i].faults;
+                    bill = price * repairsMade;
+                    }
+                }     
+            document.getElementById('displaybill').value = 'Total bill for vehicle with registration ' + registration.value + ' : £' + bill;
+        }
 
-        // function calculateBill(registration) {
-        //     if(car == null) {
-        //         alert('cannot calculate bill')
-        //     } else {
-        //         let registration = car.reg;
-        //         let price = 50;
-        //         let repairsMade = car.problems;
-        //         bill = price * repairsMade;
-        //         return bill;
-        //     }
-        // }
-
-        // calculateBill('ea53mrv');
-        // console.log(calculateBill('ea53mrv'));
+        function outputGarage() {
+            garage.forEach(x => document.write(JSON.stringify(x,2)));
+        }
 
     </script>
 </html>
